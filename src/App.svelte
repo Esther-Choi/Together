@@ -25,7 +25,7 @@
 {:else if $pageType == "board"}
   <Board />
 {/if}
-{#if $isCalendarAddModal}
+{#if $isCalendarAddModal.open}
   <CalendarModal />
 {/if}
 {#if $isProjectSelectModal}

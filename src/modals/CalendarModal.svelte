@@ -8,10 +8,8 @@
   import AddSchedule from "./AddSchedule.svelte";
   import AddCard from "./AddCard.svelte";
 
-  let addType = "";
-
   function toggleModal() {
-    $isCalendarAddModal = !$isCalendarAddModal;
+    $isCalendarAddModal.open = !$isCalendarAddModal.open;
   }
 </script>
 
@@ -27,12 +25,12 @@
       </div>
       <!--body-->
       <div class="body-div">
-        {#if addType == ""}
+        {#if $isCalendarAddModal.type == ""}
           <div class="card-div">
             <button
               class="calendar-add-btn"
               on:click={() => {
-                addType = "schedule";
+                $isCalendarAddModal.type = "schedule";
               }}
             >
               <span>Add <span style="font-weight: bold;">Schedule</span></span>
@@ -41,14 +39,14 @@
             <button
               class="calendar-add-btn"
               on:click={() => {
-                addType = "card";
+                $isCalendarAddModal.type = "card";
               }}
             >
               <span>Add <span style="font-weight: bold;">Card</span></span>
               <i><FontAwesomeIcon icon={faClipboardList} /></i>
             </button>
           </div>
-        {:else if addType == "schedule"}
+        {:else if $isCalendarAddModal.type == "schedule"}
           <AddSchedule />
         {:else}
           <AddCard />

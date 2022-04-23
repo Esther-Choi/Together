@@ -18,7 +18,8 @@
   let isAllDay = false;
 
   function toggleModal() {
-    $isCalendarAddModal = !$isCalendarAddModal;
+    $isCalendarAddModal.open = !$isCalendarAddModal.open;
+    $isCalendarAddModal.type = "";
   }
 </script>
 
