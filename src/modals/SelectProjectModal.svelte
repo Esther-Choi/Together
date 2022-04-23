@@ -1,51 +1,18 @@
 <script>
   import { isProjectSelectModal } from "../store.js";
-  import Select from "svelte-select";
-
-  let projectList = [
-    { value: "프로젝트1", label: "프로젝트1" },
-    { value: "프로젝트2", label: "프로젝트2" },
-    { value: "프로젝트3", label: "프로젝트3" },
-  ];
-  let category = [
-    { value: "준비", label: "준비" },
-    { value: "진행", label: "진행" },
-    { value: "완료", label: "완료" },
-  ];
-
-  let selectedProject;
-  let selectedCategory =
-    selectedProject == undefined ? "프로젝트 선택 필요" : "준비";
-  let isDisabled = true;
-
-  function handleSelect(event) {
-    isDisabled = false;
-    // .. do something here 🙂
-  }
-
-  function handleClear(event) {
-    isDisabled = true;
-    // .. do something here 🙂
-  }
+  import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from "fontawesome-svelte";
 
   function toggleModal() {
     $isProjectSelectModal = !$isProjectSelectModal;
   }
 </script>
 
-<div
-  style="position: absolute; overflow: hidden;
-    top: 0; background-color: rgb(63,63,63,0.2);}"
-  class="modal-container"
->
-  <div
-    id="project-modal-div"
-    class="modal-div"
-    style="display: flex; align-items: center; z-index: 2;"
-  >
+<div class="modal-container">
+  <div id="project-modal-div" class="modal-div">
     <!--content-->
     <div
-      style="width: 500px; margin: 0 auto;height: 525px;}"
+      style="width: 500px; margin: 0 auto;height: 525px;"
       class="content-div"
     >
       <!--header-->
@@ -58,44 +25,46 @@
       <!--body-->
       <div class="body-div" style="width: 100%;">
         <div id="schedule-container">
-          <div
-            style="overflow-y: scroll;height: 395px;margin-bottom: 1rem; padding: 0 2rem;"
-          >
+          <div style="height: 355px;margin-bottom: 1rem; padding: 0 2rem;">
             <div class="input-div">
-              <Select
-                items={projectList}
-                bind:value={selectedProject}
-                on:select={handleSelect}
-                on:clear={handleClear}
-                placeholder="프로젝트 이름 검색"
-              />
+              <input type="text" placeholder="프로젝트 이름 검색" />
             </div>
-            <div id="friendList_container">
+            <div id="friendList_container" class="proj-div">
               <ul>
-                <li class="flex items-center project-li">
-                  <div class="w-full">
-                    <div class="flex w-full justify-between">
-                      <p class="project-title">SPPA 고도화 프로젝트</p>
-                      <span class="date">22.03.10</span>
+                {#each Array(5) as _, i}
+                  <li class="project-li">
+                    <div style="width: 89%;">
+                      <label for="select">
+                        <div
+                          style="display: flex; width: 100%; justify-content :space-between"
+                        >
+                          <p class="project-title">SPPA 고도화 프로젝트</p>
+                          <span class="date">22.03.10</span>
+                        </div>
+                        <p class="status-msg">
+                          <i><FontAwesomeIcon icon={faUserCircle} /></i>
+                          <span>대장</span>
+                        </p>
+                      </label>
                     </div>
-                    <p class="status-msg">
-                      <i class="fas fa-user-circle" />
-                      <!-- <img
-              src="/assets/img/team-2-800x800.jpg"
-              alt=""
-              width="15px"
-              style="border-radius: 50%;"
-            /> -->
-                      <span>대장</span>
-                    </p>
-                  </div>
-                </li>
+                    <div>
+                      <input type="radio" name="select" id="select" />
+                    </div>
+                  </li>
+                {/each}
               </ul>
             </div>
           </div>
-          <div class="footer-div">
+          <div class="footer-div" style="height: 60px;">
+            <button
+              class="save-btn cancel-btn"
+              type="button"
+              on:click={toggleModal}
+            >
+              취소
+            </button>
             <button class="save-btn" type="button" on:click={toggleModal}>
-              등록하기
+              확인
             </button>
           </div>
         </div>
@@ -106,4 +75,11 @@
 <div class="opacity-25 fixed inset-0 z-40 bg-black" />
 
 <style>
+  input {
+    font-size: 0.8rem;
+  }
+
+  .footer-div button {
+    width: 80px;
+  }
 </style>
