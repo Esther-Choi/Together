@@ -9,7 +9,8 @@
       addButton: {
         text: "➕ New",
         click: function () {
-          alert("clicked the custom button!");
+          $isCalendarAddModal.open = !$isCalendarAddModal.open;
+          $isCalendarAddModal.type = "";
         },
       },
     },

@@ -24,8 +24,10 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/timegrid": "^5.11.0",
     "fontawesome-svelte": "^2.0.1",
+    "moment": "^2.29.3",
     "sirv-cli": "^2.0.0",
     "svelte-fullcalendar": "^2.0.0-beta.0",
+    "svelte-gantt": "^4.0.3-beta",
     "svelte-select": "^4.4.7",
     "svelty-picker": "^1.2.4"
   }
